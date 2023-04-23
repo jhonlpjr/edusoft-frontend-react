@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const apiUrl = 'http://localhost:8075'; // Cambia esta URL por la de tu API
+const apiUrl = 'http://157.230.237.65:8075'; // Cambia esta URL por la de tu API
 
 export const getContacts = () => {
   return axios.get(`${apiUrl}/contact`);
