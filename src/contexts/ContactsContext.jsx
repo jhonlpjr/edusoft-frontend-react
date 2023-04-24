@@ -48,7 +48,7 @@ export function ContactsContextProvider({ children }) {
 
   async function loadSavedContacts() {
     const contacts = await getContacts();
-    if (contacts) {
+    if (Array.isArray(contacts) && contacts.length > 0)  {
       setContacts(contacts);
     }
   }
@@ -58,6 +58,7 @@ export function ContactsContextProvider({ children }) {
   }, []);
 
   function addContact(newContact) {
+    //setContactsAndSave([...contacts, newContact]);
     setContactsAndSave([...contacts, newContact]);
     createContact(newContact);
   }
@@ -73,7 +74,7 @@ export function ContactsContextProvider({ children }) {
     setSearch(event.target.value);
   }
 
-  let filteredContacts;
+  let filteredContacts = [];
   if (Array.isArray(contacts)) {
      filteredContacts = contacts.filter((item) => {
         return item.names.toLowerCase().includes(search.toLowerCase());

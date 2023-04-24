@@ -1,7 +1,8 @@
 import { Input, InputMessage } from '../Input'
 import styles from './addcontact.module.scss'
 import { MdPersonAddAlt1, MdAddCircle, MdRemoveCircle, MdMessage, MdCheckCircle } from 'react-icons/md'
-import { useState } from 'react'
+import { useState, useContext } from 'react'
+import { ContactsContext } from "../../contexts/ContactsContext";
 import { useContacts } from '../../hooks/useContacts'
 
 export function AddContact() {
@@ -13,10 +14,8 @@ export function AddContact() {
     const [phoneNumber, setPhoneNumber] = useState("")
 
     const [message, setMessage] = useState("")
-
-    const { addContact } = useContacts();
-
-    const { deleteContact, isSelected, onSelectContact, selectedContacts, selectAll, contacts } = useContacts();
+    const { addContact } = useContext(ContactsContext);
+    const { selectedContacts, selectAll, contacts } = useContacts();
 
     function toggleFormAddContact() {
         setIsShowingAddContact(!isShowingAddContact);
