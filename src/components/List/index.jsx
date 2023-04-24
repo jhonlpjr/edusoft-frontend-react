@@ -11,11 +11,11 @@ export function List() {
     const [contacts, setContacts] = useState([]);
     const [filteredContacts, setFilteredContacts] = useState([]);
     const [search, setSearch] = useState('');
-
+    
     const { onSelectAll, selectAll, selectedContacts } = useContacts();
 
     useEffect(() => {
-        console.log('Se llama desde aqui tmr')
+        console.log('Se llama desde aqui tmr:' , selectAll)
         getContacts()
             .then((response) => {
                 setContacts(response.data);
@@ -32,12 +32,14 @@ export function List() {
                     .toLowerCase()
                     .includes(search.toLowerCase())
         );
-    
+        // if(Array.isArray(selectedContacts) && selectedContacts.length > 0) {
+        //     setFilteredContacts
+        // }
         setFilteredContacts(filtered);
     }, [contacts, search]);
 
     //const { filteredContacts, search } = useContacts();
-
+    console.log('Que valor hay tmr:' , selectAll)
     return (
         <section className={styles.container}>
 

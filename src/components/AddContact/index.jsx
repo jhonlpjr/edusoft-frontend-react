@@ -42,7 +42,7 @@ export function AddContact() {
     function onSubmitWhatsApp(event) {
         event.preventDefault()
         if (selectAll) {
-            console.log('Nuestrame los contacts:', contacts)
+            console.log('Muestrame los contacts totalisimos:', contacts)
             contacts.forEach((contact) => {
                 window.open(
                     `https://api.whatsapp.com/send?phone=${contact.phoneNumber}&text=${encodeURIComponent(
@@ -52,7 +52,7 @@ export function AddContact() {
                 )
             })
         } else {
-            console.log('Nuestrame los selectedContacts:', selectedContacts)
+            console.log('Muestrame los selectedContacts:', selectedContacts)
             selectedContacts.forEach((contact) => {
                 window.open(
                     `https://api.whatsapp.com/send?phone=${contact.phoneNumber}&text=${encodeURIComponent(

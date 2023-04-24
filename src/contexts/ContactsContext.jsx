@@ -11,17 +11,19 @@ export function ContactsContextProvider({ children }) {
 
   const [selectAll, setSelectAll] = useState(false);
 
-//   const handleSelectContact = (contactId) => {
-//     setSelectedContacts((prevSelectedContacts) => {
-//       if (prevSelectedContacts.includes(contactId)) {
-//         return prevSelectedContacts.filter((id) => id !== contactId);
-//       } else {
-//         return [...prevSelectedContacts, contactId];
-//       }
-//     });
-//   };
+  //   const handleSelectContact = (contactId) => {
+  //     setSelectedContacts((prevSelectedContacts) => {
+  //       if (prevSelectedContacts.includes(contactId)) {
+  //         return prevSelectedContacts.filter((id) => id !== contactId);
+  //       } else {
+  //         return [...prevSelectedContacts, contactId];
+  //       }
+  //     });
+  //   };
 
   const onSelectAll = () => {
+    console.log('entra por aquiwis')
+    console.log('valor de selectAll:', selectAll)
     if (selectAll) {
       setSelectedContacts(contacts);
       setSelectAll(false);
@@ -33,12 +35,19 @@ export function ContactsContextProvider({ children }) {
   };
 
   function onSelectContact(contact) {
-    setSelectedContacts((prevSelected) => {
-      if (prevSelected.includes(contact)) {
-        return prevSelected.filter((contacto) => contacto !== contact);
-      }
-      return [...prevSelected, contact];
-    });
+    const prevSelecteds = selectedContacts.filter((contacto) => contacto !== contact);
+    setSelectedContacts([...prevSelecteds, contact]);
+    // setSelectedContacts((prevSelected) => {
+    //   if (prevSelected.includes(contact)) {
+    //     return prevSelected.filter((contacto) => contacto !== contact);
+    //   }
+    //   return [...prevSelected, contact];
+    // });
+  }
+
+  function onDeSelectContact(contact) {
+    const prevSelecteds = selectedContacts.filter((contacto) => contacto !== contact);
+    setSelectedContacts(prevSelecteds);
   }
 
   function setContactsAndSave(newContacts) {
@@ -48,7 +57,7 @@ export function ContactsContextProvider({ children }) {
 
   async function loadSavedContacts() {
     const contacts = await getContacts();
-    if (Array.isArray(contacts) && contacts.length > 0)  {
+    if (Array.isArray(contacts) && contacts.length > 0) {
       setContacts(contacts);
     }
   }
@@ -76,9 +85,9 @@ export function ContactsContextProvider({ children }) {
 
   let filteredContacts = [];
   if (Array.isArray(contacts)) {
-     filteredContacts = contacts.filter((item) => {
-        return item.names.toLowerCase().includes(search.toLowerCase());
-      });
+    filteredContacts = contacts.filter((item) => {
+      return item.names.toLowerCase().includes(search.toLowerCase());
+    });
   }
 
 
@@ -93,7 +102,9 @@ export function ContactsContextProvider({ children }) {
         filteredContacts,
         selectedContacts,
         onSelectContact,
+        onDeSelectContact,
         onSelectAll,
+        selectAll,
       }}
     >
       {children}
