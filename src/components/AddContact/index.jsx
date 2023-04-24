@@ -3,7 +3,6 @@ import styles from './addcontact.module.scss'
 import { MdPersonAddAlt1, MdAddCircle, MdRemoveCircle, MdMessage, MdCheckCircle } from 'react-icons/md'
 import { useState } from 'react'
 import { useContacts } from '../../hooks/useContacts'
-import { createContact, getContacts } from '../../services/contact.service'
 
 export function AddContact() {
     const [isShowingAddContact, setIsShowingAddContact] = useState(false)

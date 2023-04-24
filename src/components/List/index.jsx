@@ -15,7 +15,7 @@ export function List() {
     const { onSelectAll, selectAll, selectedContacts } = useContacts();
 
     useEffect(() => {
-
+        console.log('Se llama desde aqui tmr')
         getContacts()
             .then((response) => {
                 setContacts(response.data);
@@ -23,15 +23,17 @@ export function List() {
             .catch((error) => {
                 console.log(error);
             });
-
-        const filtered = contacts.filter((item) =>
-            `${item.names} ${item.lastNames}`
-                .toLowerCase()
-                .includes(search.toLowerCase())
+    }, []);
+    
+    useEffect(() => {
+        const filtered = contacts.filter(
+            (item) =>
+                `${item.names} ${item.lastNames}`
+                    .toLowerCase()
+                    .includes(search.toLowerCase())
         );
-
+    
         setFilteredContacts(filtered);
-
     }, [contacts, search]);
 
     //const { filteredContacts, search } = useContacts();
