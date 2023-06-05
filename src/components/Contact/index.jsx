@@ -27,8 +27,9 @@ export function Contact(props) {
                 {/*<img src={props.contactData.avatar ?? placeholderImg} alt={props.contactData.name} />*/}
                 <input type="checkbox" checked={selectAll || selected ? true : false} onChange={() => handleSelect()} />
                 <div className={styles.details}>
-                    <strong>{props.contactData.names} {props.contactData.lastNames}</strong>
-                    <span>{props.contactData.phoneNumber}</span>
+                    <strong>{props.contactData.names} {props.contactData.lastNames} / {props.contactData.phoneNumber}</strong>
+                    <span>Colegio: {props.contactData.names} / Código: {props.contactData.code}</span>
+                    <span>Dirección: {props.contactData.address} / Red: {props.contactData.network}</span>
                 </div>
             </div>
             <button onClick={() => deleteContact(props.contactData.id)} className={styles.delete}>
